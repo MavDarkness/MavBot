@@ -1,6 +1,6 @@
 import discord
 import taskruns
-import secrets
+import secret_reader
 
 client = discord.Client()
 
@@ -30,4 +30,4 @@ async def on_message(message):
     elif message.author == user.bot:
         print(message.content)
 
-client.run(secrets.token())
+client.run(secret_reader.token())
