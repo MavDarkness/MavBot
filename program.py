@@ -17,9 +17,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print(message.author)
-
-    if message.author != client.get_user_info('446091547637710859'):
         args = message.content.lower().split(' ')
 
         if args[0] == '!log':
@@ -27,7 +24,5 @@ async def on_message(message):
                                       "Thanks, {} your message has been logged.".format(message.author))
             await client.send_message(client.get_channel('442476383113969664'),
                                       str(message.author) + ' ' + ' '.join(args[1:]))
-    elif message.author == user.bot:
-        print(message.content)
 
 client.run(secret_reader.read_token())
