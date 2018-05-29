@@ -2,3 +2,4 @@
 __pycache__
 venv
 secrets.py
+bot_secret_token.txt
