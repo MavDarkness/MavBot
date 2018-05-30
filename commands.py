@@ -39,7 +39,7 @@ async def both_commands(args, client, message):
     if args[0][1:] in both_commands_dict.keys():
         await both_commands_dict[args[0][1:]](args, client, message)
 
-@both
+@both(help="Tells you the discord.gg link to join the discord server.")
 async def discord(args, client, message):
     await client.send_message(message.channel, "Join the discord: https://discord.gg/UBCqM8y")
 
@@ -80,7 +80,7 @@ async def commands(args, client, message):
 
     await client.send_message(message.channel, text)
 
-@both(help="This command list")
+@both(help="Alias for !commands")
 async def help(args, client, message):
     await commands(args, client, message)
 
