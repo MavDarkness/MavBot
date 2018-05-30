@@ -15,25 +15,17 @@ def both(func):
     return func
 
 async def discord_commands(args, client, message):
-    try:
-        if args[0][1:] in discord_commands_dict.keys():
-            await discord_commands_dict[args[0][1:]](args, client, message)
-    except Exception as e:
-        pass
+
+    if args[0][1:] in discord_commands_dict.keys():
+        await discord_commands_dict[args[0][1:]](args, client, message)
 
 async def minecraft_commands(args, client, message):
-    try:
-        if args[0][1:] in minecraft_commands_dict.keys():
-            await minecraft_commands_dict[args[0][1:]](args, client, message)
-    except Exception as e:
-        pass
+    if args[0][1:] in minecraft_commands_dict.keys():
+        await minecraft_commands_dict[args[0][1:]](args, client, message)
 
 async def both_commands(args, client, message):
-    try:
-        if args[0][1:] in both_commands_dict.keys():
-            await both_commands_dict[args[0][1:]](args, client, message)
-    except Exception as e:
-        pass
+    if args[0][1:] in both_commands_dict.keys():
+        await both_commands_dict[args[0][1:]](args, client, message)
 
 @both
 async def discord(args, client, message):
