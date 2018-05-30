@@ -15,6 +15,7 @@ def both(func):
     return func
 
 async def discord_commands(args, client, message):
+
     if args[0][1:] in discord_commands_dict.keys():
         await discord_commands_dict[args[0][1:]](args, client, message)
 
