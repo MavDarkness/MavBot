@@ -43,17 +43,6 @@ async def both_commands(args, client, message):
 async def discord(args, client, message):
     await client.send_message(message.channel, "Join the discord: https://discord.gg/UBCqM8y")
 
-@discord_only
-async def log(args, client, message):
-    await client.send_message(
-        message.channel,
-        "Thanks, {} your message has been logged.".format(message.author)
-    )
-    await client.send_message(
-        client.get_channel('442476383113969664'),
-        str(message.author) + ' ' + ' '.join(args[1:])
-    )
-
 @both(help="Tells you the server IPs and versions")
 async def server(args, client, message):
     await client.send_message(message.channel, "MS3D: ms3d.tahgcraft.com 3.3.1.4")
