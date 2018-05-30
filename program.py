@@ -2,9 +2,11 @@ import discord
 import taskruns
 import secret_reader
 import commands
+import re
 
 client = discord.Client()
 
+ingame_msg_regex = re.compile(r"<([a-zA-Z0-9]+)>: (.*)")
 
 @client.event
 async def on_ready():
@@ -17,24 +19,20 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-<<<<<<< HEAD
-        args = message.content.lower().split(' ')
-
-        if args[0] == '!log':
-            await client.send_message(message.channel,
-                                      "Thanks, {} your message has been logged.".format(message.author))
-            await client.send_message(client.get_channel('442476383113969664'),
-                                      str(message.author) + ' ' + ' '.join(args[1:]))
-=======
-    if not message.author.bot:
-        args = message.content.lower().split(' ')
+    if message.author.bot:
+        msg_match = ingame_msg_regex.match(message.content.lower())
+        if msg_match is None:
+            # This would be if a bot said something besides echoing from MC
+            pass
+        else:
+            # This would be if a bot said something that was echoed from MC
+            message.author.name = msg_match.group(1)
+            args = msg_match.group(2).split(" ")
+            await commands.minecraft_commands(args, client, message)
+            await commands.both_commands(args, client, message)
+    else:
+        args = message.content.lower().split(" ")
         await commands.discord_commands(args, client, message)
         await commands.both_commands(args, client, message)
-    elif message.author.bot:
-        message.author.name = message.content.lower().split(' ')[0][1:-2]
-        in_game_args = message.content.lower().split(' ')[1:]
-        await commands.minecraft_commands(in_game_args, client, message)
-        await commands.both_commands(in_game_args, client, message)
->>>>>>> upstream/master
 
 client.run(secret_reader.read_token())
