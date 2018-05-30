@@ -48,18 +48,18 @@ def process_args(arg_str):
 @client.event
 async def on_message(message):
     if message.author.bot:
-        msg_match = ingame_msg_regex.match(message.content.lower())
+        msg_match = ingame_msg_regex.match(message.content)
         if msg_match is None:
             # This would be if a bot said something besides echoing from MC
             pass
         else:
             # This would be if a bot said something that was echoed from MC
             message.author.name = msg_match.group(1)
-            args = process_args(msg_match.group(2).lower())
+            args = process_args(msg_match.group(2))
             await commands.minecraft_commands(args, client, message)
             await commands.both_commands(args, client, message)
     else:
-        args = process_args(message.content.lower())
+        args = process_args(message.content)
         await commands.discord_commands(args, client, message)
         await commands.both_commands(args, client, message)
 

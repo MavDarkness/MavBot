@@ -1,3 +1,5 @@
+import requests
+
 minecraft_commands_dict = {}
 discord_commands_dict = {}
 both_commands_dict = {}
@@ -104,3 +106,17 @@ async def divide(args, client, message):
 async def output(args, client, message):
     for i in range(len(args)):
         print(i, args[i])
+
+@both
+async def poll(args, client, message):
+    question = args[0]
+    answers = args[1:]
+    data = {
+        "title": question,
+        "options": answers
+    }
+    new_poll_request = requests.post("https://www.strawpoll.me/api/v2/polls", json=data)
+    print(new_poll_request.text)
+    poll_url = f"https://strawpoll.me/{new_poll_request.json()['id']}"
+    message_txt = f"Created New Poll!\n{question}\n{poll_url}"
+    await client.send_message(message.channel, message_txt)
