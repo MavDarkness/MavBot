@@ -1,4 +1,5 @@
-import commands, program
+import program
+
 
 class TestProcessArgs():
     def test_basic(self):

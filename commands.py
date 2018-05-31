@@ -5,6 +5,7 @@ minecraft_commands_dict = {}
 discord_commands_dict = {}
 both_commands_dict = {}
 
+
 def decorator_base(func2=None, dict={}, help=""):
     if func2 is None:
         def retval(func):
@@ -21,37 +22,58 @@ def decorator_base(func2=None, dict={}, help=""):
 def minecraft_only(func=None, help=""):
     return decorator_base(func, minecraft_commands_dict, help=help)
 
+
 def discord_only(func=None, help=""):
     return decorator_base(func, discord_commands_dict, help=help)
 
+
 def both(func=None, help=""):
     return decorator_base(func, both_commands_dict, help=help)
+
 
 async def discord_commands(args, client, message):
     if args[0][1:] in discord_commands_dict.keys():
         await discord_commands_dict[args[0][1:]](args, client, message)
 
+
 async def minecraft_commands(args, client, message):
     if args[0][1:] in minecraft_commands_dict.keys():
         await minecraft_commands_dict[args[0][1:]](args, client, message)
+
 
 async def both_commands(args, client, message):
     if args[0][1:] in both_commands_dict.keys():
         await both_commands_dict[args[0][1:]](args, client, message)
 
+
 @both(help="Tells you the discord.gg link to join the discord server.")
 async def discord(args, client, message):
-    await client.send_message(message.channel, "Join the discord: https://discord.gg/UBCqM8y")
+    await client.send_message(
+        message.channel,
+        "Join the discord: https://discord.gg/UBCqM8y"
+    )
+
 
 @both(help="Tells you the server IPs and versions")
 async def server(args, client, message):
-    await client.send_message(message.channel, "MS3D: ms3d.tahgcraft.com 3.3.1.4")
-    await client.send_message(message.channel, "Sevtech: sevtech.tahgcraft.com 3.0.7 - use FTBU x.14")
-    await client.send_message(message.channel, "Continuum: continuum.tahgcraft.com 1.0.2")
+    await client.send_message(
+        message.channel,
+        "MS3D: ms3d.tahgcraft.com 3.3.1.4"
+    )
+    await client.send_message(
+        message.channel,
+        "Sevtech: sevtech.tahgcraft.com 3.0.7 - use FTBU x.14"
+    )
+    await client.send_message(
+        message.channel,
+        "Continuum: continuum.tahgcraft.com 1.0.2"
+    )
+
 
 @minecraft_only(help="n y e t  m y  l i t t l e  c y k a s")
 async def giveitem(args, client, message):
     await client.send_message(message.channel, "No cheating for you!")
+
 
 def commands_impl(dict):
     text = ""
@@ -62,6 +84,7 @@ def commands_impl(dict):
             text += f"    !{command} - {help_dict[command]}\n"
     text += "\n"
     return text
+
 
 @both(help="This command list")
 async def commands(args, client, message):
@@ -80,29 +103,39 @@ async def commands(args, client, message):
 
     await client.send_message(message.channel, text)
 
+
 @both(help="Alias for !commands")
 async def help(args, client, message):
     await commands(args, client, message)
 
+
 @both
 async def begfordw20(args, client, message):
-    await client.send_message(message.channel, "FOR THE LAST TIME! IT'S NOT UP TO ME!")
+    await client.send_message(
+        message.channel,
+        "FOR THE LAST TIME! IT'S NOT UP TO ME!"
+    )
+
 
 @minecraft_only
 async def add(args, client, message):
     await client.send_message(message.channel, float(args[1]) + float(args[2]))
 
+
 @minecraft_only
 async def multiply(args, client, message):
     await client.send_message(message.channel, float(args[1]) * float(args[2]))
+
 
 @minecraft_only
 async def subtract(args, client, message):
     await client.send_message(message.channel, float(args[1]) - float(args[2]))
 
+
 @minecraft_only
 async def divide(args, client, message):
     await client.send_message(message.channel, float(args[1]) / float(args[2]))
+
 
 @both(help="First argument is the question, the rest are the choices")
 async def poll(args, client, message):
@@ -112,7 +145,10 @@ async def poll(args, client, message):
         "title": question,
         "options": answers
     }
-    new_poll_request = requests.post("https://www.strawpoll.me/api/v2/polls", json=data)
+    new_poll_request = requests.post(
+        "https://www.strawpoll.me/api/v2/polls",
+        json=data
+    )
     print(new_poll_request.text)
     poll_url = f"https://strawpoll.me/{new_poll_request.json()['id']}"
     message_txt = f"Created New Poll!\n{question}\n{poll_url}"

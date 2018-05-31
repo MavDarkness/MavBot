@@ -8,6 +8,7 @@ client = discord.Client()
 
 ingame_msg_regex = re.compile(r"<([a-zA-Z0-9]+)>: (.*)")
 
+
 @client.event
 async def on_ready():
     print('Logged in as')
@@ -17,33 +18,45 @@ async def on_ready():
     print('Discord version number: {}'.format(discord.__version__))
     await taskruns.task_runs()
 
+
 def process_args(arg_str):
     split = arg_str.split(" ")
     in_str = False
     args = []
     for word in split:
-        if len(word) == 0: # If there are multiple spaces between words
+        if len(word) == 0:
+            # If there are multiple spaces between words
             continue
-        elif in_str: # If we are currently between quotes
-            if word[-1] == "\"": # If the word ends with a quote
+        elif in_str:
+            # If we are currently between quotes
+            if word[-1] == "\"":
+                # If the word ends with a quote
                 in_str = False
                 args[-1] += word[:-1]
-            else: # If the word is just text
+            else:
+                # If the word is just text
                 args[-1] += word + " "
         else:
-            if word[0] == "\"": # If the word starts with a quote
-                if len(word) == 1: # If the word is a single quote with no text
+            if word[0] == "\"":
+                # If the word starts with a quote
+                if len(word) == 1:
+                    # If the word is a single quote with no text
                     args.append("\"")
                 else:
-                    if word[-1] == "\"" and not word[-2] == "\\": # If the word ends with a quote
-                        if not len(word) == 2: # If the word is more than just two quotes
+                    if word[-1] == "\"" and not word[-2] == "\\":
+                        # If the word ends with a quote
+                        if not len(word) == 2:
+                            # If the word is more than just two quotes
                             args.append(word[1:-1])
-                    else: # If the word is like "text
+                    else:
+                        # If the word is like "text
                         in_str = True
                         args.append(word[1:] + " ")
-            else: # If there are no quotes to deal with
+            else:  # If there are no quotes to deal with
                 args.append(word)
-    return [arg.replace("\\\"", "\"") for arg in args] # Replace \" with ", in case you actually need to type a quote
+    # Replace \" with ", in case you actually need to type a quote
+    return [arg.replace("\\\"", "\"") for arg in args]
+
 
 @client.event
 async def on_message(message):
