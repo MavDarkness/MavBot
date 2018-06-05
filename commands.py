@@ -67,7 +67,7 @@ async def server(args, client, message):
     )
     await client.send_message(
         message.channel,
-        "Continuum: continuum.tahgcraft.com 1.0.2"
+        "Continuum: continuum.tahgcraft.com 1.1.0"
     )
 
 
@@ -156,5 +156,5 @@ async def log(args, client, message):
 
 
 @minecraft_only
-async def giveitem(client, message):
+async def giveitem(args, client, message):
     await client.sendMessage(message.channel, 'NYET, ill give the item to myself instead of you!')
