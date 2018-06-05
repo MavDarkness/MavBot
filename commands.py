@@ -12,6 +12,7 @@ def decorator_base(func2=None, dict={}, help=""):
             dict[func.__name__] = func
             help_dict[func.__name__] = help
             return func
+
         return retval
     else:
         dict[func2.__name__] = func2
@@ -70,11 +71,6 @@ async def server(args, client, message):
     )
 
 
-@minecraft_only(help="n y e t  m y  l i t t l e  c y k a s")
-async def giveitem(args, client, message):
-    await client.send_message(message.channel, "No cheating for you!")
-
-
 def commands_impl(dict):
     text = ""
     for command in list(dict.keys()):
@@ -109,14 +105,6 @@ async def help(args, client, message):
     await commands(args, client, message)
 
 
-@both
-async def begfordw20(args, client, message):
-    await client.send_message(
-        message.channel,
-        "FOR THE LAST TIME! IT'S NOT UP TO ME!"
-    )
-
-
 @minecraft_only
 async def add(args, client, message):
     await client.send_message(message.channel, float(args[1]) + float(args[2]))
@@ -139,8 +127,8 @@ async def divide(args, client, message):
 
 @both(help="First argument is the question, the rest are the choices")
 async def poll(args, client, message):
-    question = args[0]
-    answers = args[1:]
+    question = args[1]
+    answers = args[2:]
     data = {
         "title": question,
         "options": answers
@@ -154,6 +142,7 @@ async def poll(args, client, message):
     message_txt = f"Created New Poll!\n{question}\n{poll_url}"
     await client.send_message(message.channel, message_txt)
 
+
 @discord_only
 async def log(args, client, message):
     await client.send_message(
@@ -162,5 +151,10 @@ async def log(args, client, message):
     )
     await client.send_message(
         client.get_channel('442476383113969664'),
-       str(message.author) + ' ' + ' '.join(args[1:])
+        str(message.author) + ' ' + ' '.join(args[1:])
     )
+
+
+@minecraft_only
+async def giveitem(client, message):
+    await client.sendMessage(message.channel, 'NYET, ill give the item to myself instead of you!')
