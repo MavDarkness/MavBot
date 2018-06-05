@@ -1,7 +1,7 @@
 import program
 
 
-class TestProcessArgs():
+class TestProcessArgs:
     def test_basic(self):
         args = program.process_args("arg1 arg2 arg3")
         assert args[0] == "arg1"

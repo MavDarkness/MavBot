@@ -6,7 +6,7 @@ import re
 
 client = discord.Client()
 
-ingame_msg_regex = re.compile(r"<([a-zA-Z0-9]+)>: (.*)")
+in_game_msg_regex = re.compile(r"<([a-zA-Z0-9]+)>: (.*)")
 
 
 @client.event
@@ -61,7 +61,7 @@ def process_args(arg_str):
 @client.event
 async def on_message(message):
     if message.author.bot:
-        msg_match = ingame_msg_regex.match(message.content)
+        msg_match = in_game_msg_regex.match(message.content)
         if msg_match is None:
             # This would be if a bot said something besides echoing from MC
             pass

@@ -153,3 +153,14 @@ async def poll(args, client, message):
     poll_url = f"https://strawpoll.me/{new_poll_request.json()['id']}"
     message_txt = f"Created New Poll!\n{question}\n{poll_url}"
     await client.send_message(message.channel, message_txt)
+
+@discord_only
+async def log(args, client, message):
+    await client.send_message(
+        message.channel,
+        "Thanks, {} your message has been logged.".format(message.author)
+    )
+    await client.send_message(
+        client.get_channel('442476383113969664'),
+       str(message.author) + ' ' + ' '.join(args[1:])
+    )
