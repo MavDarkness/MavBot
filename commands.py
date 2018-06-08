@@ -157,4 +157,4 @@ async def log(args, client, message):
 
 @minecraft_only
 async def giveitem(args, client, message):
-    await client.sendMessage(message.channel, 'NYET, ill give the item to myself instead of you!')
+    await client.send_message(message.channel, 'NYET, ill give the item to myself instead of you!')
