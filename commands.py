@@ -57,18 +57,8 @@ async def discord(args, client, message):
 
 @both(help="Tells you the server IPs and versions")
 async def server(args, client, message):
-    await client.send_message(
-        message.channel,
-        "MS3D: ms3d.tahgcraft.com 3.3.1.4"
-    )
-    await client.send_message(
-        message.channel,
-        "Sevtech: sevtech.tahgcraft.com 3.0.7 - use FTBU x.14"
-    )
-    await client.send_message(
-        message.channel,
-        "Continuum: continuum.tahgcraft.com 1.1.0"
-    )
+    with open("serverinfo.txt", "r") as serverinfofile:
+        await client.send_message(message.channel, str(serverinfofile.read()))
 
 
 def commands_impl(dict):

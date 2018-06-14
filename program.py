@@ -12,11 +12,12 @@ in_game_msg_regex = re.compile(r"<([a-zA-Z0-9]+)>: (.*)")
 @client.event
 async def on_ready():
     print('Logged in as')
+    print('------')
     print(client.user.name)
     print(client.user.id)
     print('------')
     print('Discord version number: {}'.format(discord.__version__))
-    await taskruns.task_runs()
+    await taskruns.task_runs(client)
 
 
 def process_args(arg_str):
@@ -78,3 +79,4 @@ async def on_message(message):
 
 if __name__ == "__main__":
     client.run(secret_reader.read_token())
+
