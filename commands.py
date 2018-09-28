@@ -155,5 +155,5 @@ async def giveitem(args, client, message):
 async def quote(args, client, message):
     await client.send_message(
         message.channel,
-        markov_chain.generate()
+        markov_chain.generate().replace("\t", " --- ")
     )
