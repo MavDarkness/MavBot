@@ -153,4 +153,7 @@ async def giveitem(args, client, message):
 
 @both(help="Generates a very real quote that someone 100% did say")
 async def quote(args, client, message):
-    markov_chain.generate()
+    await client.send_message(
+        message.channel,
+        markov_chain.generate()
+    )
