@@ -1,4 +1,5 @@
 import requests
+import markov_chain
 
 help_dict = {}
 minecraft_commands_dict = {}
@@ -148,3 +149,8 @@ async def log(args, client, message):
 @minecraft_only
 async def giveitem(args, client, message):
     await client.send_message(message.channel, 'NYET, ill give the item to myself instead of you!')
+
+
+@both(help="Generates a very real quote that someone 100% did say")
+async def quote(args, client, message):
+    markov_chain.generate()
