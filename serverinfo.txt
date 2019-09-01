@@ -1,3 +1,0 @@
-MS3D: ms3d.tahgcraft.com 3.3.1.4
-Sevtech: sevtech.tahgcraft.com 3.0.8 - use FTBU x.14
-Continuum: continuum.tahgcraft.com 1.2.1
