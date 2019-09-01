@@ -3,4 +3,5 @@ __pycache__
 .pytest_cache
 venv
 bot_secret_token.txt
+serverinfo.txt
 .vscode
