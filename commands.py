@@ -58,7 +58,7 @@ async def discord(args, client, message):
 @both(help="Tells you the server IPs and versions")
 async def server(args, client, message):
     with open("serverinfo.txt", "r") as serverinfofile:
-        await client.send_message(message.channel, str(serverinfofile.read()))
+        await message.channel.send(str(serverinfofile.read()))
 
 
 def commands_impl(dict):
@@ -87,7 +87,7 @@ async def commands(args, client, message):
 
     text += "```"
 
-    await client.send_message(message.channel, text)
+    await message.channel.send(text)
 
 
 @both(help="Alias for !commands")
@@ -97,22 +97,22 @@ async def help(args, client, message):
 
 @minecraft_only
 async def add(args, client, message):
-    await client.send_message(message.channel, float(args[1]) + float(args[2]))
+    await message.channel.send(float(args[1]) + float(args[2]))
 
 
 @minecraft_only
 async def multiply(args, client, message):
-    await client.send_message(message.channel, float(args[1]) * float(args[2]))
+    await message.channel.send(float(args[1]) * float(args[2]))
 
 
 @minecraft_only
 async def subtract(args, client, message):
-    await client.send_message(message.channel, float(args[1]) - float(args[2]))
+    await message.channel.send(float(args[1]) - float(args[2]))
 
 
 @minecraft_only
 async def divide(args, client, message):
-    await client.send_message(message.channel, float(args[1]) / float(args[2]))
+    await message.channel.send(float(args[1]) / float(args[2]))
 
 
 @both(help="First argument is the question, the rest are the choices")
@@ -130,7 +130,7 @@ async def poll(args, client, message):
     print(new_poll_request.text)
     poll_url = f"https://strawpoll.me/{new_poll_request.json()['id']}"
     message_txt = f"Created New Poll!\n{question}\n{poll_url}"
-    await client.send_message(message.channel, message_txt)
+    await message.channel.send(message_txt)
 
 
 @discord_only
@@ -147,4 +147,4 @@ async def log(args, client, message):
 
 @minecraft_only
 async def giveitem(args, client, message):
-    await client.send_message(message.channel, 'NYET, ill give the item to myself instead of you!')
+    await message.channel.send('NYET, ill give the item to myself instead of you!')
